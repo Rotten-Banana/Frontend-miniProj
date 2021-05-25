@@ -19,7 +19,6 @@ const LoginForm = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(async () => {
-            console.log(values);
             try {
               const response = await axios.post("http://localhost:4000/login", {
                 type_id: values.id,
@@ -76,7 +75,7 @@ const LoginForm = () => {
             >
               Submit
             </button>
-            <h1 className="text-red-400 text-sm">{error}</h1>
+            <h1>{error}</h1>
           </Form>
         )}
       </Formik>

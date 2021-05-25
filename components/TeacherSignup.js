@@ -1,7 +1,13 @@
 import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const TeacherSignup = () => {
+  axios.defaults.withCredentials = true;
+  let error = null;
+  let success = null;
+  const router = useRouter();
   return (
     <div>
       <Formik
@@ -27,9 +33,41 @@ const TeacherSignup = () => {
           if (!values.institutekey) errors.institutekey = "Required";
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          setTimeout(async () => {
             console.log(values);
+            try {
+              const flag = await axios.post(
+                "http://localhost:4000/validate/institutekey",
+                {
+                  key: values.institutekey,
+                }
+              );
+              if (flag.data === "valid") {
+                const response = await axios.post(
+                  "http://localhost:4000/signup/teacher",
+                  {
+                    type_id: values.id,
+                    password: values.password,
+                    email: values.email,
+                    full_name: values.fullname,
+                    type: "T",
+                  }
+                );
+                console.log(response.data);
+
+                if (response.data === "inserted") {
+                  resetForm();
+                  success = "User Registered. Try Logging in";
+                } else {
+                  error = response.data;
+                }
+              } else {
+                error = "Invalid Institute Key";
+              }
+            } catch (err) {
+              console.log(err);
+            }
             setSubmitting(false);
           }, 400);
         }}
@@ -111,6 +149,7 @@ const TeacherSignup = () => {
               >
                 Submit
               </button>
+              <h1>{success ? success : error}</h1>
             </div>
           </Form>
         )}
