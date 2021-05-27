@@ -1,14 +1,20 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 
 import Timer from "./Timer";
 
-const CreatePaper = () => {
-  let text = null;
+const CreatePaper = ({ username }) => {
+  console.log(username);
+  let text = "";
   return (
     <div className="w-2/3">
       <Formik
-        initialValues={{ subjectCode: "", name: "", time: "", questions: "" }}
+        initialValues={{
+          subjectCode: "",
+          subjectName: "",
+          time: "",
+          questions: "",
+        }}
         // validate={(values) => {
         //   const errors = {};
         //   if (!values.id) errors.id = "Required";
@@ -19,7 +25,15 @@ const CreatePaper = () => {
           setTimeout(async () => {
             text =
               "<h1>" + values.questions.replaceAll("\n", "<br />") + "</h1>";
-            console.log(Number(values.time));
+
+            const data = {
+              name: username,
+              subjectCode: values.subjectCode,
+              subjectName: values.subjectName,
+              time: Number(values.time),
+              questions: text,
+            };
+            console.log(data);
             setSubmitting(false);
           }, 400);
         }}
@@ -39,9 +53,9 @@ const CreatePaper = () => {
                 <div className="m-2 w-full">
                   <Field
                     className="p-1 w-full"
-                    type="name"
-                    name="name"
-                    placeholder="Question Setter Name"
+                    type="subjectName"
+                    name="subjectName"
+                    placeholder="Subject Name"
                   />
                 </div>
                 <div className="m-2 w-full">

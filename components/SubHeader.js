@@ -1,18 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const SubHeader = () => {
-  const [username, setusername] = useState();
+const SubHeader = ({ username }) => {
   const router = useRouter();
   axios.defaults.withCredentials = true;
-  useEffect(() => {
-    axios.get("http://localhost:4000/me").then((response) => {
-      response.data.name ? setusername(response.data.name) : router.push("/");
-    });
-  });
-
   const logoutHandler = async () => {
     if (username) {
       const response = await axios.post("http://localhost:4000/logout");
