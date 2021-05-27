@@ -1,5 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+
 import LoginForm from "../components/LoginForm";
 import StudentSignup from "../components/StudentSignup";
 import TeacherSignup from "../components/TeacherSignup";
@@ -7,6 +10,12 @@ import Header from "../components/Header";
 
 const index = () => {
   const [FormState, setFormState] = useState("login");
+  const router = useRouter();
+  axios.defaults.withCredentials = true;
+  useEffect(async () => {
+    const res = await axios.get("http://localhost:4000/me");
+    res.data.id ? router.push("/dashboard") : null;
+  }, []);
   let body = null;
   if (FormState === "login") {
     body = <LoginForm />;
