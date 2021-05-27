@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import SubHeader from "../components/SubHeader";
 
 const dashboard = () => {
-  const [data, setdata] = useState({
+  const [user, setuser] = useState({
     id: 0,
     type: "",
     name: "",
@@ -17,13 +17,13 @@ const dashboard = () => {
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     const res = await axios.get("http://localhost:4000/me");
-    res.data.id ? setdata(res.data) : router.push("/");
+    res.data.id ? setuser(res.data) : router.push("/");
   }, []);
   return (
     <div className="bg-gray-300 min-h-screen">
       <Header />
-      <SubHeader username={data.name} />
-      {data.type === "T" ? <CreatePaper username={data.name} /> : null}
+      <SubHeader username={user.name} />
+      {user.type === "T" ? <CreatePaper /> : null}
     </div>
   );
 };

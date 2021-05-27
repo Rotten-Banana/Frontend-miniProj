@@ -1,10 +1,11 @@
 import React from "react";
+import axios from "axios";
 import { Formik, Form, Field } from "formik";
 
 import Timer from "./Timer";
 
-const CreatePaper = ({ username }) => {
-  console.log(username);
+const CreatePaper = () => {
+  axios.defaults.withCredentials = true;
   let text = "";
   return (
     <div className="w-2/3">
@@ -21,19 +22,31 @@ const CreatePaper = ({ username }) => {
         //   if (!values.password) errors.password = "Required";
         //   return errors;
         // }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(async () => {
-            text =
-              "<h1>" + values.questions.replaceAll("\n", "<br />") + "</h1>";
+            try {
+              text =
+                "<h1>" + values.questions.replaceAll("\n", "<br />") + "</h1>";
 
-            const data = {
-              name: username,
-              subjectCode: values.subjectCode,
-              subjectName: values.subjectName,
-              time: Number(values.time),
-              questions: text,
-            };
-            console.log(data);
+              const data = {
+                subjectCode: values.subjectCode,
+                subjectName: values.subjectName,
+                time: Number(values.time),
+                questions: text,
+              };
+              const response = await axios.post(
+                "http://localhost:4000/teacher/createpaper",
+                data
+              );
+              console.log(response.data);
+              if (response.data === "question paper added") {
+                resetForm();
+                // success = "User Registered. Try Logging in";
+              } else {
+                // error = response.data;
+              }
+            } catch (err) {}
+
             setSubmitting(false);
           }, 400);
         }}
