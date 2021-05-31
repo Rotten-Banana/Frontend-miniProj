@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const Papers = ({ type }) => {
+const Papers = ({ user }) => {
   const [questions, setquestions] = useState();
   const router = useRouter();
   axios.defaults.withCredentials = true;
@@ -10,17 +10,16 @@ const Papers = ({ type }) => {
     const res = await axios.get("http://localhost:4000/questions/getall");
     setquestions(res.data);
   }, []);
-  console.log(questions);
 
   const questionHandler = (id) => {
-    type === "S" ? console.log("type:", type) : console.log("not a student");
-
-    console.log("id:", id);
+    if (user.type === "S") {
+      router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
+    }
   };
 
   return (
     <div>
-      <table className="w-2/3 mx-5 p-3 table-auto border-collapse border-none border-blue-500">
+      <table className="cursor-pointer w-2/3 mx-5 p-3 table-auto border-collapse border-none border-blue-500">
         <thead>
           <tr>
             <th className="p- bg-blue-400 border-l-2 border-r-2 border-blue-500">

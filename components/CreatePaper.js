@@ -9,7 +9,6 @@ const CreatePaper = () => {
   const [marks, setmarks] = useState([""]);
   axios.defaults.withCredentials = true;
   let questionObject = "";
-  let questions = "";
   let error = null;
   let success = null;
 

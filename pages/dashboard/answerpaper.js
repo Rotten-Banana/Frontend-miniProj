@@ -21,7 +21,7 @@ const answerpaper = () => {
           <Header />
           <SubHeader username={user.name} />
           {user.type === "S" ? (
-            <Papers type={user.type} />
+            <Papers user={user} />
           ) : (
             <div>
               <h1>Not a Student</h1>
