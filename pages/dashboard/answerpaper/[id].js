@@ -52,11 +52,6 @@ const id = () => {
     return () => clearInterval(interval);
   }, [isActive, timer]);
 
-  console.log("user", user);
-  console.log("userId", userId);
-  console.log("paperId", id);
-  console.log("Paper", Question);
-  console.log("Timer", timer);
   return (
     <div>
       {user ? (
@@ -64,24 +59,26 @@ const id = () => {
           <div className="bg-gray-300 min-h-screen">
             <Header />
             <div className="text-center">
-              <h1>{timer}</h1>
+              {timer ? <h1>Time Remaining: {timer}mins</h1> : null}
               {Question ? <QuestionPaper question={Question} /> : null}
             </div>
-            {!isActive ? (
-              <button
-                onClick={startExamHandler}
-                className="bg-green-500 p-2 px-5 m-2"
-              >
-                Start Exam
-              </button>
-            ) : (
-              <button
-                onClick={toogleIsActive}
-                className="bg-green-500 p-2 px-5 m-2"
-              >
-                Stop
-              </button>
-            )}
+            <div className="flex my-40">
+              {!isActive ? (
+                <button
+                  onClick={startExamHandler}
+                  className="bg-green-500 p-2 px-5 m-auto flex"
+                >
+                  Start Exam
+                </button>
+              ) : (
+                <button
+                  onClick={toogleIsActive}
+                  className="bg-green-500 p-2 px-5 m-2"
+                >
+                  Stop
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           <div className="bg-blue-500 min-h-screen flex flex-col justify-center">
