@@ -5,6 +5,56 @@ import axios from "axios";
 import Header from "../../../components/Header";
 import QuestionPaper from "../../../components/QuestionPaper";
 
+import "react-quill/dist/quill.snow.css";
+import { useQuill } from "react-quilljs";
+
+const modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["image"],
+    ["clean"],
+  ],
+  clipboard: {
+    matchVisual: true,
+  },
+  imageCompress: {
+    quality: 0.7, // default
+    maxWidth: 500, // default
+    maxHeight: 500, // default
+    imageType: "image/jpeg", // default
+    debug: true, // default
+  },
+};
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "image",
+];
+
+const theme = "snow";
+const placeholder = "write something epic";
+
 const id = () => {
   const [user, setuser] = useState();
   const [Question, setQuestion] = useState();
@@ -13,6 +63,19 @@ const id = () => {
   const router = useRouter();
   const { id, userId } = router.query;
   axios.defaults.withCredentials = true;
+
+  const { quill, quillRef, Quill } = useQuill({
+    theme,
+    modules,
+    formats,
+    placeholder,
+  });
+
+  if (Quill && !quill) {
+    // For execute this line only once.
+    const ImageCompress = require("quill-image-compress").default;
+    Quill.register("modules/imageCompress", ImageCompress);
+  }
 
   const getPaper = async () => {
     const paperResponse = await axios.post(
@@ -52,24 +115,48 @@ const id = () => {
     return () => clearInterval(interval);
   }, [isActive, timer]);
 
+  if (isActive && timer === 0) {
+    toogleIsActive();
+    settimer(Question.time);
+    const delta = quill.getContents();
+    console.log(delta);
+    console.log("time over");
+  }
+
   return (
-    <div>
+    <div className="bg-gray-300 min-h-screen">
+      <Header />
+
       {user ? (
         user.id === Number(userId) ? (
-          <div className="bg-gray-300 min-h-screen">
-            <Header />
-            <div className="text-center">
-              {timer ? <h1>Time Remaining: {timer}mins</h1> : null}
+          <div>
+            <div
+              className={
+                !isActive
+                  ? "hidden"
+                  : "text-center my-2 w-3/4 bg-gray-100 border-2 mx-auto border-gray-900"
+              }
+            >
+              {timer ? (
+                <h1 className="my-3">Time Remaining: {timer}mins</h1>
+              ) : null}
               {Question ? <QuestionPaper question={Question} /> : null}
             </div>
-            <div className="flex my-40">
+            <div className="flex">
               {!isActive ? (
-                <button
-                  onClick={startExamHandler}
-                  className="bg-green-500 p-2 px-5 m-auto flex"
-                >
-                  Start Exam
-                </button>
+                <div className="my-3 mx-auto flex flex-col w-3/4">
+                  <h1 className="my-3 text-center font-semibold">
+                    After clicking Start the exam will commence and the time
+                    will start the paper will be submitted once the time is over
+                    or if you choose to submit manually. Good Luck
+                  </h1>
+                  <button
+                    onClick={startExamHandler}
+                    className="bg-green-500 p-2 px-5 w-1/4 mx-auto"
+                  >
+                    Start Exam
+                  </button>
+                </div>
               ) : (
                 <button
                   onClick={toogleIsActive}
@@ -89,6 +176,9 @@ const id = () => {
           </div>
         )
       ) : null}
+      <div className={!isActive ? "hidden" : "w-10/12 mx-auto"}>
+        <div ref={quillRef} />
+      </div>
     </div>
   );
 };

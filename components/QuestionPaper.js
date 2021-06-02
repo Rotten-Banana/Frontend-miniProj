@@ -8,11 +8,13 @@ const QuestionPaper = ({ question }) => {
   );
   return (
     <div>
-      <h1>{question.subjectName}</h1>
-      <h1>({question.subjectCode})</h1>
-      <div className="flex justify-around">
-        <h1>Time: {question.time}mins</h1>
-        <h1>Full Marks: {fullMarks}</h1>
+      <div className="border-t border-b border-gray-900">
+        <h1>{question.subjectName}</h1>
+        <h1>({question.subjectCode})</h1>
+        <div className="flex justify-around">
+          <h1>Time: {question.time}mins</h1>
+          <h1>Full Marks: {fullMarks}</h1>
+        </div>
       </div>
       <div className="text-lg m-3 mx-10">
         {questions.questions.map((q, i) => {
