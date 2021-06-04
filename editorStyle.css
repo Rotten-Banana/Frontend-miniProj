@@ -1,5 +1,6 @@
 .ql-editor {
   background-color: aliceblue;
+  max-height: 20em;
 }
 
 .ql-toolbar {

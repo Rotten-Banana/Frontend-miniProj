@@ -21,7 +21,9 @@ const QuestionPaper = ({ question }) => {
           return (
             <div className="flex justify-between" key={i}>
               <h1 className="m-2">{q}</h1>
-              <h1 className="m-2">[{questions.marks[i]}]</h1>
+              <h1 className="m-2">
+                {questions.marks[i] !== 0 ? `[${questions.marks[i]}]` : null}
+              </h1>
             </div>
           );
         })}
