@@ -1,0 +1,35 @@
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+
+import Header from "../../components/Header";
+import SubHeader from "../../components/SubHeader";
+import Papers from "../../components/Papers";
+
+const gradepaper = () => {
+  const [user, setuser] = useState();
+  const router = useRouter();
+  axios.defaults.withCredentials = true;
+  useEffect(async () => {
+    const res = await axios.get("http://localhost:4000/me");
+    res.data.id ? setuser(res.data) : router.push("/");
+  }, []);
+  return (
+    <div>
+      {user ? (
+        <div>
+          <Header />
+          <SubHeader username={user.name} />
+          {user.type === "T" ? (
+            <div>
+              <h1 className="text-lg font-semibold m-3">Your Papers: </h1>
+              <Papers user={user} />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export default gradepaper;

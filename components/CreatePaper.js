@@ -155,16 +155,6 @@ const CreatePaper = () => {
               Submit
             </button>
             <div className="text-lg m-3">
-              {questionObject.questions
-                ? questionObject.questions.map((q, i) => {
-                    return (
-                      <div className="flex" key={i}>
-                        <h1 className="m-2">{q}</h1>
-                        <h1 className="m-2">[{questionObject.marks[i]}]</h1>
-                      </div>
-                    );
-                  })
-                : null}
               <h1>{success ? success : error}</h1>
             </div>
           </Form>

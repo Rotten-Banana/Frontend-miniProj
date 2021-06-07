@@ -110,13 +110,14 @@ const id = () => {
   };
 
   const sendAnswer = async (answer) => {
-    const respose = await axios.post("http://localhost:4000/answer/insert", {
+    const response = await axios.post("http://localhost:4000/answer/insert", {
       paperId: id,
       subCode: Question.subjectCode,
       subName: Question.subjectName,
       answer: answer,
     });
-    if (respose.data === "inserted") {
+    console.log(response.data);
+    if (response.data === "inserted") {
       setMsg("Answer is submitted");
     }
   };

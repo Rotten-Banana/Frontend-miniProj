@@ -9,9 +9,13 @@ const TeacherDash = () => {
   const createPaperHandler = () => {
     router.push("/dashboard/createpaper");
   };
+
+  const gradePaperHandler = () => {
+    router.push("/dashboard/gradepaper");
+  };
   return (
     <div>
-      <div>
+      <div className="flex">
         <button
           className="mx-5 flex flex-col items-center"
           onClick={createPaperHandler}
@@ -33,10 +37,19 @@ const TeacherDash = () => {
           </div>
           <h1>Create Paper</h1>
         </button>
+        <button
+          className="mx-5 flex flex-col items-center"
+          onClick={gradePaperHandler}
+        >
+          <div className="bg-green-500 p-3.5 px-4 w-auto">
+            <h1 className="font-bold text-lg">A+</h1>
+          </div>
+          <h1>Grade Paper</h1>
+        </button>
       </div>
       <div className="my-10">
         <h1 className="text-lg font-semibold m-3">Question Papers:</h1>
-        <Papers user={{ type: "T" }} />
+        <Papers user={{ type: "S" }} />
       </div>
     </div>
   );
