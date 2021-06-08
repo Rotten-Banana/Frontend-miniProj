@@ -190,7 +190,7 @@ const id = () => {
           <div className="my-auto h-96 flex flex-col justify-center">
             <h1 className="text-center font-black text-5xl">
               Error 401
-              <br /> Unautorized Route
+              <br /> Unauthorized Route
             </h1>
           </div>
         )

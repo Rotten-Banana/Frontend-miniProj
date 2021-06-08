@@ -2,13 +2,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import Header from "../../components/Header";
-import SubHeader from "../../components/SubHeader";
-import Papers from "../../components/Papers";
+import Header from "../../../../components/Header";
+import SubHeader from "../../../../components/SubHeader";
 
-const gradepaper = () => {
+const answerId = () => {
   const [user, setuser] = useState();
   const router = useRouter();
+  const { questionId, answerId } = router.query;
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     const res = await axios.get("http://localhost:4000/me");
@@ -16,15 +16,14 @@ const gradepaper = () => {
   }, []);
   return (
     <div>
-      {user ? (
+      {user && answerId ? (
         <div>
           <Header />
           <SubHeader username={user.name} />
           {user.type === "T" ? (
-            <div>
-              <h1 className="text-lg font-semibold m-3">Your Papers: </h1>
-              <Papers user={user} />
-            </div>
+            <h1>
+              AnswerId: {answerId} QuestionId: {questionId}
+            </h1>
           ) : (
             <h1 className="text-lg font-semibold m-3">Access Denied</h1>
           )}
@@ -34,4 +33,4 @@ const gradepaper = () => {
   );
 };
 
-export default gradepaper;
+export default answerId;
