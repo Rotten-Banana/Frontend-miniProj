@@ -22,7 +22,10 @@ const questionId = () => {
           <Header />
           <SubHeader username={user.name} />
           {user.type === "T" ? (
-            <AnswerList questionId={questionId} user={user} />
+            <div>
+              <h1 className="text-lg font-semibold m-3">Answer Papers:</h1>
+              <AnswerList questionId={questionId} user={user} />
+            </div>
           ) : (
             <h1 className="text-lg font-semibold m-3">Access Denied</h1>
           )}

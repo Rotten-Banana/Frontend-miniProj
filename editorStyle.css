@@ -1,8 +1,29 @@
 .ql-editor {
   background-color: aliceblue;
-  max-height: 20em;
+  line-height: 2em !important;
 }
 
 .ql-toolbar {
   background-color: aliceblue;
+}
+
+blockquote {
+  border-left: 4px solid #ccc;
+  margin: 0 !important;
+  padding-left: 1em !important;
+}
+
+pre {
+  background-color: #23241f;
+  color: #f8f8f2;
+  overflow: visible;
+  padding-left: 1em !important;
+}
+
+.ql-snow .ql-editor h1 {
+  font-size: 2em;
+}
+
+.ql-snow .ql-editor h2 {
+  font-size: 1.5em;
 }
