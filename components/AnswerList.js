@@ -19,7 +19,6 @@ const AnswerList = ({ questionId, user }) => {
       router.push(`/dashboard/gradepaper/${questionId}/${id}`);
     }
   };
-  console.log(answers);
   return (
     <div>
       {answers ? (

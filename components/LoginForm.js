@@ -24,7 +24,6 @@ const LoginForm = () => {
                 type_id: values.id,
                 password: values.password,
               });
-              console.log(response.data);
 
               if (response.data === "logged in") {
                 router.push("/dashboard");

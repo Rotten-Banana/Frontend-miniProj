@@ -43,7 +43,7 @@ const Answer = ({ answerId }) => {
     }
   }, [Answer, quill]);
   return (
-    <div className="border-2 border-gray-900 m-2">
+    <div className="border-2 border-gray-900 m-2 w-full">
       {Answer ? (
         <div
           className="text-center font-semibold"

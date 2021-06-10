@@ -26,7 +26,6 @@ const Papers = ({ user }) => {
       router.push(`/dashboard/gradepaper/${id}`);
     }
   };
-  console.log(questions);
   return (
     <div>
       {questions ? (

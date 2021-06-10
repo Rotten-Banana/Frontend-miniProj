@@ -21,7 +21,7 @@ const SubHeader = ({ username }) => {
         className="bg-green-500 p-2 px-5 m-2 flex items-center"
         onClick={logoutHandler}
       >
-        <p>Logout</p>
+        <p className="text-lg font-semibold">Logout</p>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

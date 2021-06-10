@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../../../components/Header";
 import SubHeader from "../../../../components/SubHeader";
 import Answer from "../../../../components/Answer";
+import Grade from "../../../../components/Grade";
 
 const answerId = () => {
   const [user, setuser] = useState();
@@ -22,8 +23,9 @@ const answerId = () => {
           <Header />
           <SubHeader username={user.name} />
           {user.type === "T" ? (
-            <div>
+            <div className="flex justify-between">
               <Answer answerId={answerId} />
+              <Grade questionId={questionId} answerId={answerId} />
             </div>
           ) : (
             <h1 className="text-lg font-semibold m-3">Access Denied</h1>
