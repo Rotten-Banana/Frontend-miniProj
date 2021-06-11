@@ -20,7 +20,7 @@ const Papers = ({ user }) => {
   }, []);
 
   const questionHandler = (id) => {
-    if (user.type === "S") {
+    if (user.type === "S" && user.id) {
       router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
     } else if (user.type === "T") {
       router.push(`/dashboard/gradepaper/${id}`);
@@ -44,7 +44,7 @@ const Papers = ({ user }) => {
                     Paper Setter
                   </th>
                   <th className="p-2 bg-blue-400 border-l-2 border-r-2 border-blue-500">
-                    Time
+                    Time(min)
                   </th>
                 </tr>
               </thead>
