@@ -24,10 +24,14 @@ const Grade = ({ questionId, answerId }) => {
     setTotal(t);
   };
 
-  const handleMarksChangeOnChange = (e, index) => {
+  const handleMarksChangeOnChange = (e, index, marks) => {
     const newArr = [...givenMarks];
-    newArr[index] = isNaN(Number(e.target.value)) ? 0 : Number(e.target.value);
-    setGivenMarks(newArr);
+    newArr[index] = isNaN(Number(e.target.value))
+      ? alert("Must be a Number")
+      : Number(e.target.value);
+    newArr[index] <= marks
+      ? setGivenMarks(newArr)
+      : alert("Must be within Given marks");
   };
 
   const submitMarksHandler = async () => {
@@ -59,13 +63,14 @@ const Grade = ({ questionId, answerId }) => {
               return (
                 <div key={index} className="flex m-4">
                   <h1 className="mx-2">
-                    {count1}.{count2}
+                    {count1 === 0 ? null : `${count1}.`}
+                    {count2}
                     {") "}
                   </h1>
                   <input
                     className="p-1 mx-2 h-7 w-12"
                     onBlur={(e) => handleMarksChangeOnBlur()}
-                    onChange={(e) => handleMarksChangeOnChange(e, index)}
+                    onChange={(e) => handleMarksChangeOnChange(e, index, marks)}
                   />
                   <h1 className="mx-1">/{marks}</h1>
                 </div>

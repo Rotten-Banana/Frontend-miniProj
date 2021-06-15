@@ -23,6 +23,9 @@ const Header = () => {
             {`St. Thomas' College of Engineering & Technology`}
           </h1>
           <h1>4, Diamond Harbour Road, Kidderpore, Kolkata - 700023</h1>
+          <h1 className="font-bold cursor-pointer">
+            Internal Examination Portal
+          </h1>
         </div>
       </div>
     </div>

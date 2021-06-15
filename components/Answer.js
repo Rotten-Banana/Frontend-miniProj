@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
+// import { pdfExporter } from "quill-to-pdf";
+// import { PDFReader } from "reactjs-pdf-reader";
 import "react-quill/dist/quill.bubble.css";
 
 const formats = [
@@ -20,6 +22,7 @@ const formats = [
 
 const Answer = ({ answerId }) => {
   const [Answer, setAnswer] = useState();
+  const [blob, setBlob] = useState();
   const { quill, quillRef, Quill } = useQuill({
     modules: { toolbar: false },
     formats,
@@ -36,12 +39,17 @@ const Answer = ({ answerId }) => {
       : alert("Something went wrong try reloading.");
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (Answer && quill) {
       const ans = JSON.parse(Answer.answer);
+      // const pdfBlob = await pdfExporter.generatePdf(ans);
       quill.setContents(ans);
+      // const url = URL.createObjectURL(pdfBlob);
+      // console.log(pdfBlob);
+      // setBlob(url);
     }
   }, [Answer, quill]);
+
   return (
     <div className="border-2 border-gray-900 m-2 w-full">
       {Answer ? (
@@ -63,6 +71,7 @@ const Answer = ({ answerId }) => {
         style={{ backgroundColor: "aliceblue" }}
         ref={quillRef}
       />
+      {/* {blob ? <PDFReader url={blob} /> : null} */}
     </div>
   );
 };
