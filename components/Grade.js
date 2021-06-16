@@ -45,7 +45,7 @@ const Grade = ({ questionId, answerId }) => {
   let count1 = 0;
   let count2 = 0;
   return (
-    <div className="w-auto p-2 px-4 m-2 text-center bg-green-500 border-2 border-gray-900">
+    <div className="w-auto p-2 px-4 m-2 text-center bg-blue-500 border-2 border-gray-900">
       <h1 className="text-lg font-semibold m-3">Marks</h1>
       {Marks ? (
         <div>
@@ -78,7 +78,12 @@ const Grade = ({ questionId, answerId }) => {
             }
           })}
           <h1 className="text-lg font-semibold m-3">Total Marks: {total}</h1>
-          <button onClick={submitMarksHandler}>Submit Marks</button>
+          <button
+            className="p-1 px-2 m-2 font-semibold border-2 border-gray-900 shadow-xl"
+            onClick={submitMarksHandler}
+          >
+            Submit Marks
+          </button>
         </div>
       ) : null}
     </div>

@@ -9,7 +9,9 @@ const AnswerList = ({ questionId, user }) => {
   useEffect(async () => {
     const res = await axios.post(
       "http://localhost:4000/answer/getbyquestionid",
-      { questionId }
+      {
+        questionId,
+      }
     );
     setanswers(res.data);
   }, []);
@@ -38,6 +40,9 @@ const AnswerList = ({ questionId, user }) => {
                   </th>
                   <th className="p-2 bg-blue-400 border-l-2 border-r-2 border-blue-500">
                     Student Id
+                  </th>
+                  <th className="p-2 bg-blue-400 border-l-2 border-r-2 border-blue-500">
+                    Grade Status
                   </th>
                 </tr>
               </thead>
@@ -84,6 +89,45 @@ const AnswerList = ({ questionId, user }) => {
                             }
                           >
                             {answer.userTypeId}
+                          </td>
+                          <td
+                            className={
+                              index % 2 !== 0
+                                ? "p-2 border-l-2 border-r-2 border-blue-500 bg-blue-300"
+                                : "p-2 border-l-2 border-r-2 border-blue-500"
+                            }
+                          >
+                            {answer.marks ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-green-600 items-center"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-red-600"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
+                            )}
                           </td>
                         </tr>
                       );

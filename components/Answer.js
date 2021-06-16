@@ -51,12 +51,12 @@ const Answer = ({ answerId }) => {
   }, [Answer, quill]);
 
   return (
-    <div className="border-2 border-gray-900 m-2 w-full">
+    <div
+      className="border-2 border-gray-900 m-2 w-full"
+      style={{ backgroundColor: "aliceblue" }}
+    >
       {Answer ? (
-        <div
-          className="text-center font-semibold"
-          style={{ backgroundColor: "aliceblue" }}
-        >
+        <div className="text-center font-semibold">
           <h1>{Answer.subjectCode}</h1>
           <h1>{Answer.subjectName}</h1>
           <h1>{Answer.userName}</h1>
@@ -66,11 +66,7 @@ const Answer = ({ answerId }) => {
       ) : (
         <h1>Loading...</h1>
       )}
-      <div
-        className={!Answer ? "hidden" : "p-4"}
-        style={{ backgroundColor: "aliceblue" }}
-        ref={quillRef}
-      />
+      <div className={!Answer ? "hidden" : "p-4"} ref={quillRef} />
       {/* {blob ? <PDFReader url={blob} /> : null} */}
     </div>
   );

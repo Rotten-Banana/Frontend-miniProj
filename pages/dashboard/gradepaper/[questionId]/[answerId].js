@@ -50,37 +50,19 @@ const answerId = () => {
         <div>
           <Header />
           <SubHeader username={user.name} />
-          <div className="sticky top-4">
-            <button
-              onClick={toggleQuestion}
-              className="bg-green-500 rounded-full p-2 m-2 flex items-center focus:outline-none focus:ring-2 focus:ring-gray-900"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
+
           {user.type === "T" ? (
             <div className="flex justify-between">
               <Answer answerId={answerId} />
               {question ? (
-                <div
-                  className={
-                    questionState
-                      ? "text-center my-2 w-3/4 bg-gray-100 border-2 mx-auto border-gray-900"
-                      : "hidden"
-                  }
-                >
-                  <div className="sticky top-4">
+                <div className={questionState ? "w-3/4" : null}>
+                  <div
+                    className={
+                      questionState
+                        ? "text-center sticky top-4 my-2 bg-gray-100 border-2 mx-auto border-gray-900"
+                        : "hidden"
+                    }
+                  >
                     <QuestionPaper question={question} />
                   </div>
                 </div>
@@ -88,6 +70,26 @@ const answerId = () => {
               <div>
                 <div className="sticky top-4">
                   <Grade questionId={questionId} answerId={answerId} />
+                  <div className="sticky">
+                    <button
+                      onClick={toggleQuestion}
+                      className="bg-blue-500 rounded-full p-2 m-2 flex items-center focus:outline-none focus:ring-2 focus:ring-gray-900"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <h1 className="mx-2">View Questions</h1>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
