@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 const Papers = ({ user }) => {
   const [questions, setquestions] = useState();
   const router = useRouter();
+  console.log(router.pathname);
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     if (user.type === "S") {
@@ -19,11 +20,24 @@ const Papers = ({ user }) => {
     }
   }, []);
 
-  const questionHandler = (id) => {
-    if (user.type === "S" && user.id) {
+  const questionHandler = (e, id) => {
+    if (user.type === "S" && user.id && e.target.tagName === "TD") {
       router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
-    } else if (user.type === "T") {
+    } else if (user.type === "T" && e.target.tagName === "TD") {
       router.push(`/dashboard/gradepaper/${id}`);
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    if (user.type === "T") {
+      const res = await axios.post(
+        "http://localhost:4000/question/deletebyid",
+        { paperId: id }
+      );
+      console.log(res.data);
+      if (res.data === "deleted") {
+        router.reload();
+      }
     }
   };
   return (
@@ -53,7 +67,7 @@ const Papers = ({ user }) => {
                   ? questions.map((question, index) => {
                       return (
                         <tr
-                          onClick={() => questionHandler(question.id)}
+                          onClick={(e) => questionHandler(e, question.id)}
                           key={index}
                         >
                           <td
@@ -92,6 +106,28 @@ const Papers = ({ user }) => {
                           >
                             {question.time}
                           </td>
+                          {router.pathname === "/dashboard/gradepaper" &&
+                          user.type === "T" ? (
+                            <td>
+                              <button
+                                onClick={() => deleteHandler(question.id)}
+                                className="mx-3"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 text-red-600"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                            </td>
+                          ) : null}
                         </tr>
                       );
                     })
