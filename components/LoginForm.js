@@ -20,10 +20,13 @@ const LoginForm = () => {
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(async () => {
             try {
-              const response = await axios.post("http://localhost:4000/login", {
-                type_id: values.id,
-                password: values.password,
-              });
+              const response = await axios.post(
+                "https://internal-examination.herokuapp.com/login",
+                {
+                  type_id: values.id,
+                  password: values.password,
+                }
+              );
 
               if (response.data === "logged in") {
                 router.push("/dashboard");

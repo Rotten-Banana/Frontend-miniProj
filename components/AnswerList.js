@@ -8,7 +8,7 @@ const AnswerList = ({ questionId, user }) => {
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     const res = await axios.post(
-      "http://localhost:4000/answer/getbyquestionid",
+      "https://internal-examination.herokuapp.com/answer/getbyquestionid",
       {
         questionId,
       }

@@ -72,7 +72,7 @@ const id = () => {
 
   const getPaper = async () => {
     const paperResponse = await axios.post(
-      "http://localhost:4000/question/getbyid",
+      "https://internal-examination.herokuapp.com/question/getbyid",
       {
         paperId: id,
       }
@@ -85,7 +85,7 @@ const id = () => {
 
   const startExamHandler = async () => {
     const response = await axios.post(
-      "http://localhost:4000/validate/eligibility",
+      "https://internal-examination.herokuapp.com/validate/eligibility",
       {
         paperId: id,
       }
@@ -103,12 +103,15 @@ const id = () => {
   };
 
   const sendAnswer = async (answer) => {
-    const response = await axios.post("http://localhost:4000/answer/insert", {
-      paperId: id,
-      subCode: Question.subjectCode,
-      subName: Question.subjectName,
-      answer: answer,
-    });
+    const response = await axios.post(
+      "https://internal-examination.herokuapp.com/answer/insert",
+      {
+        paperId: id,
+        subCode: Question.subjectCode,
+        subName: Question.subjectName,
+        answer: answer,
+      }
+    );
     console.log(response.data);
     if (response.data === "inserted") {
       setMsg("Answer is submitted");
@@ -126,7 +129,9 @@ const id = () => {
   };
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:4000/me");
+    const res = await axios.get(
+      "https://internal-examination.herokuapp.com/me"
+    );
     res.data.id ? setuser(res.data) : router.push("/");
   }, []);
 

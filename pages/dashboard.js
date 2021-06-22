@@ -13,7 +13,9 @@ const dashboard = () => {
   const router = useRouter();
   axios.defaults.withCredentials = true;
   useEffect(async () => {
-    const res = await axios.get("http://localhost:4000/me");
+    const res = await axios.get(
+      "https://internal-examination.herokuapp.com/me"
+    );
     res.data.id ? setuser(res.data) : router.push("/");
   }, []);
   return (

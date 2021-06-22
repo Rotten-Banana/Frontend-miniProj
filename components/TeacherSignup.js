@@ -38,14 +38,14 @@ const TeacherSignup = () => {
             console.log(values);
             try {
               const flag = await axios.post(
-                "http://localhost:4000/validate/institutekey",
+                "https://internal-examination.herokuapp.com/validate/institutekey",
                 {
                   key: values.institutekey,
                 }
               );
               if (flag.data === "valid") {
                 const response = await axios.post(
-                  "http://localhost:4000/signup/teacher",
+                  "https://internal-examination.herokuapp.com/signup/teacher",
                   {
                     type_id: values.id,
                     password: values.password,

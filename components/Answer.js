@@ -31,9 +31,12 @@ const Answer = ({ answerId }) => {
   });
   axios.defaults.withCredentials = true;
   useEffect(async () => {
-    const res = await axios.post("http://localhost:4000/answer/getbyanswerid", {
-      answerId,
-    });
+    const res = await axios.post(
+      "https://internal-examination.herokuapp.com/answer/getbyanswerid",
+      {
+        answerId,
+      }
+    );
     res.data.id
       ? setAnswer(res.data)
       : alert("Something went wrong try reloading.");

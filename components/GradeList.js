@@ -8,7 +8,7 @@ const GradeList = ({ studentId }) => {
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     const res = await axios.post(
-      "http://localhost:4000/answer/getbystudentid",
+      "https://internal-examination.herokuapp.com/answer/getbystudentid",
       {
         studentId,
       }

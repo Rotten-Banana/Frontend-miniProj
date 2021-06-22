@@ -9,9 +9,12 @@ const Grade = ({ questionId, answerId }) => {
   const [total, setTotal] = useState(0);
   axios.defaults.withCredentials = true;
   useEffect(async () => {
-    const res = await axios.post("http://localhost:4000/question/getbyid", {
-      paperId: questionId,
-    });
+    const res = await axios.post(
+      "https://internal-examination.herokuapp.com/question/getbyid",
+      {
+        paperId: questionId,
+      }
+    );
     res.data.id
       ? setMarks(JSON.parse(res.data.questions).marks)
       : alert("Something went wrong try reloading.");
@@ -35,10 +38,13 @@ const Grade = ({ questionId, answerId }) => {
   };
 
   const submitMarksHandler = async () => {
-    const res = await axios.post("http://localhost:4000/answer/updatemarks", {
-      marks: total,
-      id: answerId,
-    });
+    const res = await axios.post(
+      "https://internal-examination.herokuapp.com/answer/updatemarks",
+      {
+        marks: total,
+        id: answerId,
+      }
+    );
     res.data === "marks updated" ? router.back() : null;
   };
 
