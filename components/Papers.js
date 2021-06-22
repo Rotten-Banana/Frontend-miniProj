@@ -22,7 +22,7 @@ const Papers = ({ user }) => {
   }, []);
 
   const questionHandler = (e, id) => {
-    if (router.pathname === "/dashboard/gradepaper") {
+    if (router.pathname !== "/dashboard/deletepaper") {
       if (user.type === "S" && user.id && e.target.tagName === "TD") {
         router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
       } else if (user.type === "T" && e.target.tagName === "TD") {
