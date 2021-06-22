@@ -7,7 +7,9 @@ const SubHeader = ({ username }) => {
   axios.defaults.withCredentials = true;
   const logoutHandler = async () => {
     if (username) {
-      const response = await axios.post("http://localhost:4000/logout");
+      const response = await axios.post(
+        "https://internal-examination.herokuapp.com/logout"
+      );
       if (response.data === "session destroyed successfuly") {
         router.push("/");
       }

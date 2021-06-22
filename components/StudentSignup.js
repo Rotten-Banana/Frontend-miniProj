@@ -38,7 +38,7 @@ const StudentSignup = () => {
             console.log(values);
             try {
               const response = await axios.post(
-                "http://localhost:4000/signup/student",
+                "https://internal-examination.herokuapp.com/signup/student",
                 {
                   type_id: values.id,
                   password: values.password,

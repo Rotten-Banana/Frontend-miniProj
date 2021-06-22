@@ -5,15 +5,16 @@ import React, { useEffect, useState } from "react";
 const Papers = ({ user }) => {
   const [questions, setquestions] = useState();
   const router = useRouter();
-  console.log(router.pathname);
   axios.defaults.withCredentials = true;
   useEffect(async () => {
     if (user.type === "S") {
-      const res = await axios.get("http://localhost:4000/questions/getall");
+      const res = await axios.get(
+        "https://internal-examination.herokuapp.com/questions/getall"
+      );
       setquestions(res.data);
     } else if (user.type === "T") {
       const res = await axios.post(
-        "http://localhost:4000/question/getbyuserid",
+        "https://internal-examination.herokuapp.com/question/getbyuserid",
         { teacherId: user.id }
       );
       setquestions(res.data);
@@ -21,17 +22,19 @@ const Papers = ({ user }) => {
   }, []);
 
   const questionHandler = (e, id) => {
-    if (user.type === "S" && user.id && e.target.tagName === "TD") {
-      router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
-    } else if (user.type === "T" && e.target.tagName === "TD") {
-      router.push(`/dashboard/gradepaper/${id}`);
+    if (router.pathname === "/dashboard/gradepaper") {
+      if (user.type === "S" && user.id && e.target.tagName === "TD") {
+        router.push(`/dashboard/answerpaper/${id}?userId=${user.id}`);
+      } else if (user.type === "T" && e.target.tagName === "TD") {
+        router.push(`/dashboard/gradepaper/${id}`);
+      }
     }
   };
 
   const deleteHandler = async (id) => {
     if (user.type === "T") {
       const res = await axios.post(
-        "http://localhost:4000/question/deletebyid",
+        "https://internal-examination.herokuapp.com/question/deletebyid",
         { paperId: id }
       );
       console.log(res.data);
@@ -106,7 +109,7 @@ const Papers = ({ user }) => {
                           >
                             {question.time}
                           </td>
-                          {router.pathname === "/dashboard/gradepaper" &&
+                          {router.pathname === "/dashboard/deletepaper" &&
                           user.type === "T" ? (
                             <td>
                               <button

@@ -62,7 +62,7 @@ const CreatePaper = () => {
                 questions: JSON.stringify(questionObject),
               };
               const response = await axios.post(
-                "http://localhost:4000/teacher/createpaper",
+                "https://internal-examination.herokuapp.com/teacher/createpaper",
                 data
               );
               console.log(response.data);

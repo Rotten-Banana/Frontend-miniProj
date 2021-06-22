@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Papers from "../../components/Papers";
 
-const answerpaper = () => {
+const deletepaper = () => {
   const [user, setuser] = useState();
   const router = useRouter();
   axios.defaults.withCredentials = true;
@@ -17,17 +17,18 @@ const answerpaper = () => {
     res.data.id ? setuser(res.data) : router.push("/");
   }, []);
   return (
-    <div className="bg-gray-300 min-h-screen">
+    <div>
       {user ? (
         <div>
           <Header />
           <SubHeader username={user.name} />
-          {user.type === "S" ? (
-            <Papers user={user} />
-          ) : (
+          {user.type === "T" ? (
             <div>
-              <h1>Not a Student</h1>
+              <h1 className="text-lg font-semibold m-3">Your Papers: </h1>
+              <Papers user={user} />
             </div>
+          ) : (
+            <h1 className="text-lg font-semibold m-3">Access Denied</h1>
           )}
         </div>
       ) : null}
@@ -35,4 +36,4 @@ const answerpaper = () => {
   );
 };
 
-export default answerpaper;
+export default deletepaper;
