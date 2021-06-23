@@ -13,6 +13,9 @@ const index = () => {
   const router = useRouter();
   axios.defaults.withCredentials = true;
   useEffect(async () => {
+    alert(
+      "This site uses 3rd party cookies so to login allow restricted cookies or enable 3rd party cookies from your browser settings"
+    );
     const res = await axios.get(
       "https://internal-examination.herokuapp.com/me"
     );

@@ -120,7 +120,7 @@ const TeacherSignup = () => {
                     className="p-1 w-full"
                     type="id"
                     name="id"
-                    placeholder="Teacher-Id"
+                    placeholder="Teacher-Id(T-<ID>)"
                   />
                   <ErrorMessage
                     className="text-red-400 text-sm"

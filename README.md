@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Internal Examination Portal
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This project was made as a part of a course curriculum for B.Tech 3rd Year Mini Project.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This is an Examination Portal that students can use to give university internal exams also teachers can use it for creating and grading papers.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can visit the page here : [Internal Examination Portal](https://internal-examination-portal.vercel.app)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### **Note\***
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+> This site uses 3rd party cookies so to login to the site allow the restricted cookies or enable 3rd party cookies from your browser settings
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Features
 
-## Learn More
+### Student
 
-To learn more about Next.js, take a look at the following resources:
+Student can login/signup to see what exams they have to give and can give the exam on the site. Students can upload handwritten picture in the answer script in the provided text editor if they like or can use the on board features in the text editor to write their answers. After the paper is graded by the teacher students can see what marks did they get in the portal.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Teacher
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Teachers can signup to the site using the institute key to verify them as a teacher once verified they can login to create papers, grade submitted answers and also delete the paper once the examination is concluded.
 
-## Deploy on Vercel
+## Technology Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We used [NextJs](https://nextjs.org/docs) for our frontend framework.
+
+We hosted our frontend on [Vercel](https://vercel.com/).
+|Feature|Technology|
+|----|-----|
+|Forms|[Formik](https://formik.org/docs/overview)|
+|Rich Text Editor|[react-quilljs](https://www.npmjs.com/package/react-quilljs)|
+|Data Fetching|[Axios](https://www.npmjs.com/package/axios)|
+
+### Backend
+
+We used [Express](https://expressjs.com/) and [NodeJs](https://nodejs.org/en) for our backend.
+
+We hosted our backend on [Heroku](https://www.heroku.com).
+|Feature|Technology|
+|----|-----|
+|Password Hashing|[Argon 2](https://www.npmjs.com/package/argon2)|
+|Session Storage|[Express-Session](https://www.npmjs.com/package/express-session)|
+|Database Connector|[mysql2](https://www.npmjs.com/package/mysql2)|
+|CORS|[CORS](https://www.npmjs.com/package/cors)|
+
+### Database
+
+We used MySQL database for our database needs.
+
+We hosted our database on [Free MySQL Hosting](https://www.freemysqlhosting.net/).
