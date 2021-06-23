@@ -4,16 +4,22 @@ import React, { useEffect, useState } from "react";
 
 import Header from "../../../../components/Header";
 import SubHeader from "../../../../components/SubHeader";
-import Answer from "../../../../components/Answer";
 import Grade from "../../../../components/Grade";
-import QuestionPaper from "../../../../components/QuestionPaper";
 
 import dynamic from "next/dynamic";
 
-// const Answer = dynamic(() => import("../../../../components/Answer"), {
-//   ssr: false,
-//   loading: () => <h1>Loading...</h1>,
-// });
+const Answer = dynamic(() => import("../../../../components/Answer"), {
+  ssr: false,
+  loading: () => <h1>Loading...</h1>,
+});
+
+const QuestionPaper = dynamic(
+  () => import("../../../../components/QuestionPaper"),
+  {
+    ssr: false,
+    loading: () => <h1>Loading...</h1>,
+  }
+);
 
 const answerId = () => {
   const [user, setuser] = useState();
