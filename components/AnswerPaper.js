@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { useQuill } from "react-quilljs";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const QuestionPaper = dynamic(() => import("../components/QuestionPaper"), {
   ssr: false,
   loading: () => <h1>Loading...</h1>,
 });
-const AnswerPaper = ({ user, userId }) => {
+const AnswerPaper = ({ user, userId, id }) => {
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],

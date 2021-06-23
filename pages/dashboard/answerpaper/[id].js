@@ -56,7 +56,7 @@ const id = () => {
   // const [Question, setQuestion] = useState();
   // const [timer, settimer] = useState();
   // const [isActive, setisActive] = useState(false);
-  // const router = useRouter();
+  const router = useRouter();
   const { id, userId } = router.query;
   // axios.defaults.withCredentials = true;
 
@@ -158,7 +158,9 @@ const id = () => {
     <div className="bg-gray-300 min-h-screen">
       <Header />
 
-      {userId && user ? <AnswerPaper userId={userId} user={user} /> : null}
+      {userId && user ? (
+        <AnswerPaper userId={userId} user={user} id={id} />
+      ) : null}
     </div>
   );
 };
